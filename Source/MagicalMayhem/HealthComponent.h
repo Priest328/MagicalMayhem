@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Interface/Damageable.h"
 #include "HealthComponent.generated.h"
 
 DECLARE_EVENT(UActorHealthComponent, FOnDeath);

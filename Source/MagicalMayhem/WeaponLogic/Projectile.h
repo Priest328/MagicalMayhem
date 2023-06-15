@@ -8,7 +8,6 @@
 #include "Components/BoxComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
-#include "MagicalMayhem/Interface/Damageable.h"
 #include "Projectile.generated.h"
 
 UCLASS()

@@ -7,7 +7,6 @@
 #include "Components/BoxComponent.h"
 #include "MagicalMayhem/Widgets/PawnHealthBar.h"
 #include "GameFramework/Actor.h"
-#include "Interface/Damageable.h"
 #include "WallBridge.generated.h"
 
 
