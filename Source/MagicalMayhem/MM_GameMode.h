@@ -20,6 +20,12 @@ public:
     void OnActorDied(AActor* Actor);
 
 	UFUNCTION()
+	void CompleteMission(APawn* InstigatorPawn);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnCompleteMission();
+	
+	UFUNCTION()
 	void Respawn(AController* Controller);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

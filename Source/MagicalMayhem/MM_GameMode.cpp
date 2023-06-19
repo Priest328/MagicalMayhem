@@ -41,3 +41,13 @@ void AMM_GameMode::Respawn(AController* Controller)
 		}
 	}
 }
+
+void AMM_GameMode::CompleteMission(APawn* InstigatorPawn)
+{
+	if (Cast<AMM_Character>(InstigatorPawn))
+	{
+         InstigatorPawn->Destroy();
+	}
+	OnCompleteMission();
+}
+
