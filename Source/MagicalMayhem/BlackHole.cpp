@@ -25,19 +25,21 @@ ABlackHole::ABlackHole()
 void ABlackHole::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InnerSphereComp->OnComponentBeginOverlap.AddDynamic(this, &ABlackHole::ABlackHole::OverlapInnerSphere);
 	EnableGravity();
 }
 
 void ABlackHole::EnableGravity()
 {
-	--BlackHoleDuration;
+	BlackHoleDuration -= 0.035;
 	
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &ABlackHole::ProcessBlackHoleGravity, 1, true);
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &ABlackHole::ProcessBlackHoleGravity, 0.035, true);
 }
 
 void ABlackHole::ProcessBlackHoleGravity()
 {
-	BlackHoleDuration--;
+	BlackHoleDuration -= 0.035;
 	if (BlackHoleDuration <= 0)
 	{
 		GetWorldTimerManager().ClearTimer(TimerHandle);
@@ -47,16 +49,16 @@ void ABlackHole::ProcessBlackHoleGravity()
 		TArray<UPrimitiveComponent*> OverlappingComp;
 		OuterSphereComp->GetOverlappingComponents(OverlappingComp);
 
-		for (auto PrimComp : OverlappingComp)
+		for (const auto& PrimComp : OverlappingComp)
 		{
 			if (PrimComp && PrimComp->IsAnySimulatingPhysics())
 			{
 				const float SphereRadius = OuterSphereComp->GetScaledSphereRadius();
-				const float ForceStrength = -1800;
+				const float ForceStrength = -3000;
 
 				PrimComp->AddRadialForce(GetActorLocation(),SphereRadius,ForceStrength,ERadialImpulseFalloff::RIF_Constant,true);
 			}
-		}
+		} 
 	}
 }
 

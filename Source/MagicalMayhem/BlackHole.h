@@ -33,7 +33,7 @@ protected:
 	
 public:	
 
-	UPROPERTY(BlueprintReadWrite,VisibleAnywhere, Category = " TimerDuration")
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = " TimerDuration")
 	float BlackHoleDuration = 0.0f;
 	
 protected:
