@@ -2,13 +2,13 @@
 
 
 #include "MM_Character.h"
-
+#include "GameFramework/CharacterMovementComponent.h"
 #include "MagicalMayhem/MM_PlayerController.h"
-#include "DrawDebugHelpers.h"
 #include "MagicalMayhem/Widgets/HealthAmmoBarWidget.h"
 #include "MagicalMayhem/HealthComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Components/TextBlock.h"
+#include "Components/AudioComponent.h"
+#include "Components/PawnNoiseEmitterComponent.h"
 #include "GameFramework/GameMode.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -24,6 +24,8 @@ AMM_Character::AMM_Character()
 
 	// SpawnProjectileComp = CreateDefaultSubobject<USpawnProjectileComp>("ProjectComp");
 	// SpawnProjectileComp->SetupAttachment(GetRootComponent());
+
+    PawnNoiseEmitterComp = CreateDefaultSubobject<UPawnNoiseEmitterComponent>(TEXT("PawnNoiseEmitterComp"));
 
 	WeaponComponent = CreateDefaultSubobject<UWeaponComponent>("WeaponComponent");
 	WeaponComponent->SetupAttachment(SpringArmComp);
@@ -81,8 +83,7 @@ void AMM_Character::BeginPlay()
 	
 	for (auto Asset : GameLogicAssets)
 	{
-		MissionWidget->SetMission(Asset->MissionDescription); //Так, я теж бачу тут помилку, тому що якщо буде декілька місій, то вони одна одну будуть змінювати
-		// можна в принципі додати логіку, коли починається імплементація якосїсь окремої місії то ми показуємо вже її опис, 
+		MissionWidget->SetMission(Asset->MissionDescription); 
 		Asset->OnChangeMisionWidget.AddUObject(this, &AMM_Character::UpdateMissionWidget);
 	}
 
@@ -168,11 +169,10 @@ void AMM_Character::FellOutOfWorld(const UDamageType& dmgType)
 
 void AMM_Character::TurnOffWidgets()
 {
-	MissionWidget->RemoveFromViewport();
-	HealthAmmoWidget->RemoveFromViewport();
-	StrategyWidget->RemoveFromViewport();
+	// MissionWidget->RemoveFromViewport();
+	// HealthAmmoWidget->RemoveFromViewport();
+	// StrategyWidget->RemoveFromViewport();
 }
-
 
 
 

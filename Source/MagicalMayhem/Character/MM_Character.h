@@ -60,6 +60,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleAnywhere, Category = "AI")
+	UPawnNoiseEmitterComponent* PawnNoiseEmitterComp = nullptr;
+	
 	UPROPERTY(BlueprintAssignable)
 	FAnimDoubleJumpUpdate UpdateAnimEvent;
 
